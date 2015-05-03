@@ -1,0 +1,14 @@
+extends ../layout
+block content
+	.container
+		.row
+			.col-md-5
+				form(method="post",action="/user/signup")
+					.form-group
+						label(for="signupName") 用户名
+						input#signupName.form-control(name="user[name]",type="text")
+					.form-group
+						label(for="signupPassword") 用户名
+						input#signupPassword.form-control(name="user[password]",type="password")
+					.form-group
+						button.btn.btn-success(type="submit") 注册

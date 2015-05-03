@@ -1,0 +1,32 @@
+extends ../layout
+block content
+	.container
+		.row
+			table.table.table-bordered.table-hover
+				thead
+					tr
+						th 书籍名称
+						th 作者
+						th 出版社
+						th 出版年代
+						th ISBN
+						th 录入时间
+						th pv
+						th 查看
+						th 更新
+						th 删除
+				tbody
+					each item in books
+						tr(class='item-id-#{item._id}')
+							td #{item.title}
+							td #{item.author}
+							td #{item.publisher}
+							td #{item.year}
+							td #{item.isbn}
+							td #{moment(item.meta.createdAt).format('MM/DD/YYYY')}
+							td #{item.pv}
+							td: a(target="_blank",href="/book/#{item._id}") 查看
+							td: a(target="_blank",href="../book/update/#{item._id}") 修改
+							td
+								button.btn.btn-danger.del(type="button",data-id="#{item._id}") 删除
+	script(src='/js/admin.js')

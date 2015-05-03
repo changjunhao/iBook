@@ -1,0 +1,64 @@
+extends ../layout
+block content
+	.container
+		.row
+			form.form-horizontal(method='post',action='/admin/book',enctype="multipart/form-data")
+				.form-group
+					label.col-sm-2.control-label(for='douban') 豆瓣同步
+					.col-sm-5
+						input#douban.form-control(type='text')
+				if book._id
+					input(type="hidden",name="book[_id]",value="#{book._id}")
+				.form-group
+					label.col-sm-2.control-label(for='inputCategory') 书籍分类
+					.col-sm-10
+						input#inputCategory.form-control(type='text',name='book[categoryName]',value=book.categoryName)
+				.form-group
+					label.col-sm-2.control-label 分类选择
+					each cat in categories
+						label.radio-inline
+							if book.category
+								input(type='radio',name='book[category]',value=cat._id,checked=cat._id.toString()==book.category.toString())
+							else
+								input(type='radio',name='book[category]',value=cat._id)
+							| #{cat.name}
+				.form-group
+					label.col-sm-2.control-label(for='inputTitle') 书籍名称
+					.col-sm-10
+						input#inputTitle.form-control(type='text',name='book[title]',value=book.title)
+				.form-group
+					label.col-sm-2.control-label(for='inputAuthor') 作者
+					.col-sm-10
+						input#inputAuthor.form-control(type='text',name='book[author]',value=book.author)
+				.form-group
+					label.col-sm-2.control-label(for='inputPublisher') 出版社
+					.col-sm-10
+						input#inputPublisher.form-control(type='text',name='book[publisher]',value=book.publisher)
+				.form-group
+					label.col-sm-2.control-label(for='inputYear') 出版年代
+					.col-sm-10
+						input#inputYear.form-control(type='text',name='book[year]',value=book.year)
+				.form-group
+					label.col-sm-2.control-label(for='inputIsbn') ISBN
+					.col-sm-10
+						input#inputIsbn.form-control(type='text',name='book[isbn]',value=book.isbn)
+				.form-group
+					label.col-sm-2.control-label(for='inputCover') 封面地址
+					.col-sm-10
+						input#inputCover.form-control(type='text',name='book[cover]',value=book.cover)
+				.form-group
+					label.col-sm-2.control-label(for="uploadCover") 封面上传
+					.col-sm-10
+						input#uploadCover(type="file", name="uploadCover")
+				.form-group
+					label.col-sm-2.control-label(for='inputSummary') 内容简介
+					.col-sm-10
+						input#inputSummary.form-control(type='text',name='book[summary]',value=book.summary)
+				.form-group
+					label.col-sm-2.control-label(for='inputPrice') 定价
+					.col-sm-10
+						input#inputPrice.form-control(type='text',name='book[price]',value=book.price)
+				.form-group
+					.col-sm-offset-2.col-sm-2
+						button.btn.btn-default(type='submit') 录入
+	script(src='/js/admin.js')

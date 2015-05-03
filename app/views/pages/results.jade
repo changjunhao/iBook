@@ -1,0 +1,32 @@
+extends ../layout
+block content
+	.container
+		.row
+			.panel.panel-default
+				.panel-heading
+					h4 #{keyword}
+				.panel-body
+					if books && books.length > 0
+						each item in books
+							.col-md-2
+								.thumbnail
+									a(href='/book/#{item._id}')
+										if item.cover.indexOf('http:') > -1
+											img(src='#{item.cover}',alt='#{item.title}')
+										else
+											img(src='/upload/#{item.cover}',alt='#{item.title}')
+									.caption
+										h4= item.title
+										P: a.btn.btn-primary(href='/book/#{item._id}',rol='button')
+											| 查看详情
+		ul.pagination
+			- for (var i = 0; i < totalPage; i++) {
+				- if (currentPage == (i + 1)) {
+						li.active
+							span= currentPage
+				- }
+				- else {
+						li
+							a(href='/results?#{query}&p=#{i}') #{i + 1}
+				- }
+			- }
