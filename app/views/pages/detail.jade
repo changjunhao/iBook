@@ -3,7 +3,7 @@ block content
 	.container
 		.row
 			.col-md-5
-				if book.cover.indexOf('http:') > -1
+				if book.cover.indexOf('https:') > -1
 					img(src="#{book.cover}",alt="#{book.name}",width="70%",height="70%")
 				else
 					img(src='/upload/#{book.cover}',alt='#{book.title}',width="70%",height="70%")

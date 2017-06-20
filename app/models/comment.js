@@ -1,4 +1,4 @@
-var mongoose = require('mongoose');
-var CommentSchema = require('../schemas/comment');
-var Comment = mongoose.model('Comment',CommentSchema);
-module.exports =Comment;
+let mongoose = require('mongoose')
+let CommentSchema = require('../schemas/comment')
+let Comment = mongoose.model('Comment', CommentSchema)
+module.exports = Comment

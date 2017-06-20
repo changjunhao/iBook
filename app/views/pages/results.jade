@@ -11,7 +11,7 @@ block content
 							.col-md-2
 								.thumbnail
 									a(href='/book/#{item._id}')
-										if item.cover.indexOf('http:') > -1
+										if item.cover.indexOf('https:') > -1
 											img(src='#{item.cover}',alt='#{item.title}')
 										else
 											img(src='/upload/#{item.cover}',alt='#{item.title}')
