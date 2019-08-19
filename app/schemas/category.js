@@ -1,10 +1,10 @@
-let mongoose = require('mongoose')
+const mongoose = require('mongoose')
 mongoose.Promise = global.Promise
-let Schema = mongoose.Schema
-let ObjectId = Schema.Types.ObjectId
-let CategorySchema = new Schema({
+const Schema = mongoose.Schema
+const ObjectId = Schema.Types.ObjectId
+const CategorySchema = new Schema({
   name: String,
-  books: [{type: ObjectId, ref: 'Book'}],
+  books: [{ type: ObjectId, ref: 'Book' }],
   meta: {
     createdAt: {
       type: Date,
@@ -33,7 +33,7 @@ CategorySchema.statics = {
   },
   findById: function(id, cb) {
     return this
-      .findOne({_id: id})
+      .findOne({ _id: id })
       .exec(cb)
   }
 }

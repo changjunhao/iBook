@@ -1,14 +1,14 @@
-let User = require('../models/user')
+const User = require('../models/user')
 exports.signup = function(req, res) {
-  let _user = req.body.user
-  User.findOne({name: _user.name}, function(err, user) {
+  const _user = req.body.user
+  User.findOne({ name: _user.name }, function(err, user) {
     if (err) {
       console(err)
     }
     if (user) {
       return res.redirect('/signin')
     } else {
-      let user = new User(_user)
+      const user = new User(_user)
       user.save(function(err, user) {
         if (err) {
           console.log(err)
@@ -19,10 +19,10 @@ exports.signup = function(req, res) {
   })
 }
 exports.signin = function(req, res) {
-  let _user = req.body.user
-  let name = _user.name
-  let password = _user.password
-  User.findOne({name: name}, function(err, user) {
+  const _user = req.body.user
+  const name = _user.name
+  const password = _user.password
+  User.findOne({ name: name }, function(err, user) {
     if (err) {
       console.log(err)
     }
@@ -61,6 +61,7 @@ exports.list = function(req, res, next) {
     if (err) {
       console.log(err)
     }
+    console.log(users)
     res.render('userlist', {
       title: '用户列表页',
       users: users
@@ -69,14 +70,14 @@ exports.list = function(req, res, next) {
 }
 // midware for user
 exports.signinRequired = function(req, res, next) {
-  let user = req.session.user
+  const user = req.session.user
   if (!user) {
     return res.redirect('/signin')
   }
   next()
 }
 exports.adminRequired = function(req, res, next) {
-  let user = req.session.user
+  const user = req.session.user
   // if (user.role <= 10) {
   //   return res.redirect('/signin')
   // }

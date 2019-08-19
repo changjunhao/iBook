@@ -1,8 +1,8 @@
-let mongoose = require('mongoose')
+const mongoose = require('mongoose')
 mongoose.Promise = global.Promise
-let bcrypt = require('bcrypt-nodejs')
-let SALT_WORK_FACTOR = 10
-let UserSchema = new mongoose.Schema({
+const bcrypt = require('bcrypt-nodejs')
+const SALT_WORK_FACTOR = 10
+const UserSchema = new mongoose.Schema({
   name: {
     unique: true,
     type: String
@@ -24,7 +24,7 @@ let UserSchema = new mongoose.Schema({
   }
 })
 UserSchema.pre('save', function(next) {
-  let user = this
+  const user = this
   if (this.isNew) {
     this.meta.createdAt = this.meta.updateAt = Date.now()
   } else {
@@ -62,7 +62,7 @@ UserSchema.statics = {
   },
   findById: function(id, cb) {
     return this
-      .findOne({_id: id})
+      .findOne({ _id: id })
       .exec(cb)
   }
 }

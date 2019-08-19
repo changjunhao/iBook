@@ -1,22 +1,22 @@
-let express = require('express')
-let path = require('path')
-let mongoose = require('mongoose')
-let logger = require('morgan')
-let cookieParser = require('cookie-parser')
-let bodyParser = require('body-parser')
-let session = require('express-session')
-let MongoStore = require('connect-mongo')(session)
-let multer = require('multer')
+const express = require('express')
+const path = require('path')
+const mongoose = require('mongoose')
+const logger = require('morgan')
+const cookieParser = require('cookie-parser')
+const bodyParser = require('body-parser')
+const session = require('express-session')
+const MongoStore = require('connect-mongo')(session)
+const multer = require('multer')
 
-let routes = require('./routes/index')
+const routes = require('./routes/index')
 
-let app = express()
-let dburl = 'mongodb://localhost:27017/iBook'
-mongoose.connect(dburl)
+const app = express()
+const dburl = 'mongodb://localhost:27017/iBook'
+mongoose.connect(dburl, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
 
 // view engine setup
 app.set('views', path.join(__dirname, 'app/views/pages'))
-app.set('view engine', 'jade')
+app.set('view engine', 'pug')
 app.locals.moment = require('moment')
 
 // uncomment after placing your favicon in /public
@@ -26,24 +26,25 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
-app.use(multer({
-  dest: __dirname + '/public/upload/',
-  rename: function(fieldname, filename) {
-    return fieldname + '_' + filename + '_' + Date.now()
+
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    // eslint-disable-next-line no-path-concat
+    cb(null, __dirname + '/public/upload/')
+  },
+  filename: function(req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now())
   }
-}))
+})
+app.use(multer({ storage }).any())
 app.use(session({
   resave: true,
   saveUninitialized: true,
   secret: 'iBook',
-  store: new MongoStore({
-    url: dburl,
-    collection: 'sessions'
-  })
+  store: new MongoStore({ mongooseConnection: mongoose.connection })
 }))
 app.use(function(req, res, next) {
-  let _user = req.session.user
-  res.locals.user = _user
+  res.locals.user = req.session.user
   next()
 })
 
@@ -51,7 +52,7 @@ app.use('/', routes)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  let err = new Error('Not Found')
+  const err = new Error('Not Found')
   err.status = 404
   next(err)
 })

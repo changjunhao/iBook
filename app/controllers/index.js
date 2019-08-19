@@ -1,9 +1,9 @@
-let Book = require('../models/book')
-let Category = require('../models/category')
+const Book = require('../models/book')
+const Category = require('../models/category')
 exports.index = function(req, res, next) {
   Category
     .find({})
-    .populate({path: 'books', options: {limit: 6}})
+    .populate({ path: 'books', options: { limit: 6 } })
     .exec(function(err, categories) {
       if (err) {
         console.log(err)
@@ -15,14 +15,14 @@ exports.index = function(req, res, next) {
     })
 }
 exports.search = function(req, res, next) {
-  let catId = req.query.cat
-  let q = req.query.q
-  let page = parseInt(req.query.p, 10) || 0
-  let count = 2
-  let index = page * count
+  const catId = req.query.cat
+  const q = req.query.q
+  const page = parseInt(req.query.p, 10) || 0
+  const count = 2
+  const index = page * count
   if (catId) {
     Category
-      .find({_id: catId})
+      .find({ _id: catId })
       .populate({
         path: 'books',
         select: 'title cover'
@@ -31,9 +31,9 @@ exports.search = function(req, res, next) {
         if (err) {
           console.log(err)
         }
-        let category = categories[0] || {}
-        let books = category.books || []
-        let results = books.slice(index, index + count)
+        const category = categories[0] || {}
+        const books = category.books || []
+        const results = books.slice(index, index + count)
         res.render('results', {
           title: 'iBook 结果列表页面',
           keyword: category.name,
@@ -45,12 +45,12 @@ exports.search = function(req, res, next) {
       })
   } else {
     Book
-      .find({title: new RegExp(q + '.*', 'i')})
+      .find({ title: new RegExp(q + '.*', 'i') })
       .exec(function(err, books) {
         if (err) {
           console.log(err)
         }
-        let results = books.slice(index, index + count)
+        const results = books.slice(index, index + count)
         res.render('results', {
           title: 'iBook 结果列表页面',
           keyword: q,

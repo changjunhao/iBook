@@ -1,18 +1,18 @@
-let Book = require('../models/book')
-let Category = require('../models/category')
-let Comment = require('../models/comment')
-let _ = require('underscore')
+const Book = require('../models/book')
+const Category = require('../models/category')
+const Comment = require('../models/comment')
+const _ = require('underscore')
 
 exports.detail = function(req, res, next) {
-  let id = req.params.id
-  Book.update({_id: id}, {$inc: {pv: 1}}, function(err) {
+  const id = req.params.id
+  Book.update({ _id: id }, { $inc: { pv: 1 } }, function(err) {
     if (err) {
       console.log(err)
     }
   })
   Book.findById(id, function(err, book) {
     Comment
-      .find({book: id})
+      .find({ book: id })
       .populate('from', 'name')
       .populate('reply.from reply.to', 'name')
       .exec(function(err, comments) {
@@ -48,7 +48,7 @@ exports.new = function(req, res, next) {
   })
 }
 exports.update = function(req, res, next) {
-  let id = req.params.id
+  const id = req.params.id
   if (id) {
     Book.findById(id, function(err, book) {
       Category.find({}, function(err, categories) {
@@ -62,8 +62,8 @@ exports.update = function(req, res, next) {
   }
 }
 exports.save = function(req, res, next) {
-  let id = req.body.book._id
-  let bookObj = req.body.book
+  const id = req.body.book._id
+  const bookObj = req.body.book
   let _book
   if (req.cover) {
     bookObj.cover = req.cover
@@ -83,8 +83,8 @@ exports.save = function(req, res, next) {
     })
   } else {
     _book = new Book(bookObj)
-    let categoryId = bookObj.category
-    let categoryName = bookObj.categoryName
+    const categoryId = bookObj.category
+    const categoryName = bookObj.categoryName
     _book.save(function(err, book) {
       if (err) {
         console.log(err)
@@ -97,7 +97,7 @@ exports.save = function(req, res, next) {
           })
         })
       } else if (categoryName) {
-        let category = new Category({
+        const category = new Category({
           name: categoryName,
           books: [book._id]
         })
@@ -112,19 +112,19 @@ exports.save = function(req, res, next) {
   }
 }
 exports.del = function(req, res) {
-  let id = req.query.id
+  const id = req.query.id
   if (id) {
-    Book.remove({_id: id}, function(err, book) {
+    Book.remove({ _id: id }, function(err, book) {
       if (err) {
         console.log(err)
       } else {
-        res.json({success: 1})
+        res.json({ success: 1 })
       }
     })
   }
 }
 exports.saveCover = function(req, res, next) {
-  let coverData = req.files.uploadCover
+  const coverData = req.files.uploadCover
   if (coverData) {
     req.cover = coverData.name
     next()

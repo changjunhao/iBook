@@ -1,4 +1,4 @@
-let mongoose = require('mongoose')
-let BookSchema = require('../schemas/book')
-let Book = mongoose.model('Book', BookSchema)
+const mongoose = require('mongoose')
+const BookSchema = require('../schemas/book')
+const Book = mongoose.model('Book', BookSchema)
 module.exports = Book

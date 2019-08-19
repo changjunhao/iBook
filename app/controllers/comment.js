@@ -1,10 +1,10 @@
-let Comment = require('../models/comment')
+const Comment = require('../models/comment')
 exports.save = function(req, res, next) {
-  let _comment = req.body.comment
-  let bookId = _comment.book
+  const _comment = req.body.comment
+  const bookId = _comment.book
   if (_comment.cid) {
     Comment.findById(_comment.cid, function(err, comment) {
-      let reply = {
+      const reply = {
         from: _comment.from,
         to: _comment.tid,
         content: _comment.content
@@ -18,7 +18,7 @@ exports.save = function(req, res, next) {
       })
     })
   } else {
-    let comment = new Comment(_comment)
+    const comment = new Comment(_comment)
     comment.save(function(err, comment) {
       if (err) {
         console.log(err)

@@ -1,8 +1,8 @@
-let mongoose = require('mongoose')
+const mongoose = require('mongoose')
 mongoose.Promise = global.Promise
-let Schema = mongoose.Schema
-let ObjectId = Schema.Types.ObjectId
-let BookSchema = new Schema({
+const Schema = mongoose.Schema
+const ObjectId = Schema.Types.ObjectId
+const BookSchema = new Schema({
   title: String,
   author: String,
   publisher: String,
@@ -47,7 +47,7 @@ BookSchema.statics = {
   },
   findById: function(id, cb) {
     return this
-      .findOne({_id: id})
+      .findOne({ _id: id })
       .exec(cb)
   }
 }

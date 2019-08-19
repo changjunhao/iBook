@@ -1,4 +1,4 @@
-let mongoose = require('mongoose')
-let UserSchema = require('../schemas/user')
-let User = mongoose.model('User', UserSchema)
+const mongoose = require('mongoose')
+const UserSchema = require('../schemas/user')
+const User = mongoose.model('User', UserSchema)
 module.exports = User

@@ -1,10 +1,10 @@
-let express = require('express')
-let router = express.Router()
-let Index = require('../app/controllers/index')
-let User = require('../app/controllers/user')
-let Book = require('../app/controllers/book')
-let Comment = require('../app/controllers/comment')
-let Category = require('../app/controllers/category')
+const express = require('express')
+const router = express.Router()
+const Index = require('../app/controllers/index')
+const User = require('../app/controllers/user')
+const Book = require('../app/controllers/book')
+const Comment = require('../app/controllers/comment')
+const Category = require('../app/controllers/category')
 
 /* GET home page. */
 router.get('/', Index.index)
