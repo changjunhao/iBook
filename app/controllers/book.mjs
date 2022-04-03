@@ -1,9 +1,9 @@
-const Book = require('../models/book')
-const Category = require('../models/category')
-const Comment = require('../models/comment')
-const _ = require('underscore')
+import _ from 'underscore'
+import Book from '../models/book.mjs'
+import Category from '../models/category.mjs'
+import Comment from '../models/comment.mjs'
 
-exports.detail = function(req, res, next) {
+const detail = (req, res, next) => {
   const id = req.params.id
   Book.update({ _id: id }, { $inc: { pv: 1 } }, function(err) {
     if (err) {
@@ -24,7 +24,8 @@ exports.detail = function(req, res, next) {
       })
   })
 }
-exports.list = function(req, res, next) {
+
+const list = (req, res, next) => {
   Book.feach(function(err, books) {
     if (err) {
       console.log(err)
@@ -35,7 +36,8 @@ exports.list = function(req, res, next) {
     })
   })
 }
-exports.new = function(req, res, next) {
+
+const create = (req, res, next) => {
   Category.find({}, function(err, categories) {
     if (err) {
       console.log(err)
@@ -47,7 +49,8 @@ exports.new = function(req, res, next) {
     })
   })
 }
-exports.update = function(req, res, next) {
+
+const update = (req, res, next) => {
   const id = req.params.id
   if (id) {
     Book.findById(id, function(err, book) {
@@ -61,7 +64,8 @@ exports.update = function(req, res, next) {
     })
   }
 }
-exports.save = function(req, res, next) {
+
+const save = (req, res, next) => {
   const id = req.body.book._id
   const bookObj = req.body.book
   let _book
@@ -111,7 +115,8 @@ exports.save = function(req, res, next) {
     })
   }
 }
-exports.del = function(req, res) {
+
+const del = (req, res, next) => {
   const id = req.query.id
   if (id) {
     Book.remove({ _id: id }, function(err, book) {
@@ -123,12 +128,23 @@ exports.del = function(req, res) {
     })
   }
 }
-exports.saveCover = function(req, res, next) {
-  const coverData = req.files.uploadCover
+
+const saveCover = (req, res, next) => {
+  const coverData = req.files.find(item => item.fieldname === 'uploadCover')
   if (coverData) {
-    req.cover = coverData.name
+    req.cover = coverData.filename
     next()
   } else {
     next()
   }
+}
+
+export default {
+  detail,
+  list,
+  create,
+  update,
+  save,
+  del,
+  saveCover
 }

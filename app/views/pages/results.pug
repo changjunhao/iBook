@@ -10,14 +10,14 @@ block content
 						each item in books
 							.col-md-2
 								.thumbnail
-									a(href='/book/#{item._id}')
+									a(href=`/book/${item._id}`)
 										if item.cover.indexOf('https:') > -1
-											img(src='#{item.cover}',alt='#{item.title}')
+											img(src=`${item.cover}`,alt=`${item.title}`)
 										else
-											img(src='/upload/#{item.cover}',alt='#{item.title}')
+											img(src=`/upload/${item.cover}`,alt=`${item.title}`)
 									.caption
 										h4= item.title
-										P: a.btn.btn-primary(href='/book/#{item._id}',rol='button')
+										P: a.btn.btn-primary(href=`/book/${item._id}`,rol='button')
 											| 查看详情
 		ul.pagination
 			- for (var i = 0; i < totalPage; i++) {
@@ -27,6 +27,6 @@ block content
 				- }
 				- else {
 						li
-							a(href='/results?#{query}&p=#{i}') #{i + 1}
+							a(href=`/results?${query}&p=${i}`) #{i + 1}
 				- }
 			- }

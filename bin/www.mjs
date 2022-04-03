@@ -4,9 +4,11 @@
  * Module dependencies.
  */
 
-const app = require('../app')
-const debug = require('debug')('iBook:server')
-const http = require('http')
+import http from 'http'
+import debugLib from 'debug'
+import app from '../app.mjs'
+
+const debug = debugLib('iBook:server')
 
 /**
  * Get port from environment and store in Express.

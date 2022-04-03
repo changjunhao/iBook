@@ -17,7 +17,7 @@ block content
 						th 删除
 				tbody
 					each item in books
-						tr(class='item-id-#{item._id}')
+						tr(class=`item-id-${item._id}`)
 							td #{item.title}
 							td #{item.author}
 							td #{item.publisher}
@@ -25,8 +25,8 @@ block content
 							td #{item.isbn}
 							td #{moment(item.meta.createdAt).format('MM/DD/YYYY')}
 							td #{item.pv}
-							td: a(target="_blank",href="/book/#{item._id}") 查看
-							td: a(target="_blank",href="../book/update/#{item._id}") 修改
+							td: a(target="_blank",href=`/book/${item._id}`) 查看
+							td: a(target="_blank",href=`../book/update/${item._id}`) 修改
 							td
-								button.btn.btn-danger.del(type="button",data-id="#{item._id}") 删除
+								button.btn.btn-danger.del(type="button",data-id=`${item._id}`) 删除
 	script(src='/js/admin.js')

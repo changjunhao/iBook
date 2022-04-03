@@ -1,6 +1,7 @@
-const Book = require('../models/book')
-const Category = require('../models/category')
-exports.index = function(req, res, next) {
+import Book from '../models/book.mjs'
+import Category from '../models/category.mjs'
+
+const index = (req, res, next) => {
   Category
     .find({})
     .populate({ path: 'books', options: { limit: 6 } })
@@ -14,7 +15,7 @@ exports.index = function(req, res, next) {
       })
     })
 }
-exports.search = function(req, res, next) {
+const search = (req, res, next) => {
   const catId = req.query.cat
   const q = req.query.q
   const page = parseInt(req.query.p, 10) || 0
@@ -61,4 +62,9 @@ exports.search = function(req, res, next) {
         })
       })
   }
+}
+
+export default {
+  index,
+  search
 }

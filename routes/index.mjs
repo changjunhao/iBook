@@ -1,10 +1,11 @@
-const express = require('express')
+import express from 'express'
+import Index from '../app/controllers/index.mjs'
+import User from '../app/controllers/user.mjs'
+import Book from '../app/controllers/book.mjs'
+import Comment from '../app/controllers/comment.mjs'
+import Category from '../app/controllers/category.mjs'
+
 const router = express.Router()
-const Index = require('../app/controllers/index')
-const User = require('../app/controllers/user')
-const Book = require('../app/controllers/book')
-const Comment = require('../app/controllers/comment')
-const Category = require('../app/controllers/category')
 
 /* GET home page. */
 router.get('/', Index.index)
@@ -18,18 +19,18 @@ router.get('/admin/user/list', User.signinRequired, User.adminRequired, User.lis
 /* GET book page. */
 router.get('/book/:id', Book.detail)
 router.get('/admin/book/list', User.signinRequired, User.adminRequired, Book.list)
-router.get('/admin/book/new', User.signinRequired, User.adminRequired, Book.new)
+router.get('/admin/book/new', User.signinRequired, User.adminRequired, Book.create)
 router.get('/admin/book/update/:id', User.signinRequired, User.adminRequired, Book.update)
 router.post('/admin/book', User.signinRequired, User.adminRequired, Book.saveCover, Book.save)
 router.delete('/admin/book/list', User.signinRequired, User.adminRequired, Book.del)
 /* GET comment page. */
 router.post('/user/comment', User.signinRequired, Comment.save)
 /* GET category page. */
-router.get('/admin/category/new', User.signinRequired, User.adminRequired, Category.new)
+router.get('/admin/category/new', User.signinRequired, User.adminRequired, Category.create)
 router.post('/admin/category', User.signinRequired, User.adminRequired, Category.save)
 router.get('/admin/category/list', User.signinRequired, User.adminRequired, Category.list)
 router.delete('/admin/category/list', User.signinRequired, User.adminRequired, Category.del)
 /* GET results page. */
 router.get('/results', Index.search)
 
-module.exports = router
+export default router

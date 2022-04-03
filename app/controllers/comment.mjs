@@ -1,5 +1,6 @@
-const Comment = require('../models/comment')
-exports.save = function(req, res, next) {
+import Comment from '../models/comment.mjs'
+
+const save = (req, res, next) => {
   const _comment = req.body.comment
   const bookId = _comment.book
   if (_comment.cid) {
@@ -26,4 +27,8 @@ exports.save = function(req, res, next) {
       res.redirect('/book/' + bookId)
     })
   }
+}
+
+export default {
+  save
 }

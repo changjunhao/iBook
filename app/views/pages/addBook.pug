@@ -8,7 +8,7 @@ block content
 					.col-sm-5
 						input#douban.form-control(type='text')
 				if book._id
-					input(type="hidden",name="book[_id]",value="#{book._id}")
+					input(type="hidden",name="book[_id]",value=`${book._id}`)
 				.form-group
 					label.col-sm-2.control-label(for='inputCategory') 书籍分类
 					.col-sm-10

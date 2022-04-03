@@ -1,9 +1,10 @@
-const User = require('../models/user')
-exports.signup = function(req, res) {
+import User from '../models/user.mjs'
+
+const signup = (req, res, next) => {
   const _user = req.body.user
   User.findOne({ name: _user.name }, function(err, user) {
     if (err) {
-      console(err)
+      console.log(err)
     }
     if (user) {
       return res.redirect('/signin')
@@ -18,7 +19,7 @@ exports.signup = function(req, res) {
     }
   })
 }
-exports.signin = function(req, res) {
+const signin = (req, res, next) => {
   const _user = req.body.user
   const name = _user.name
   const password = _user.password
@@ -42,21 +43,23 @@ exports.signin = function(req, res) {
     })
   })
 }
-exports.showSignup = function(req, res, next) {
+const showSignup = (req, res, next) => {
   res.render('signup', {
     title: '注册页面'
   })
 }
-exports.showSignin = function(req, res, next) {
+const showSignin = (req, res, next) => {
   res.render('signin', {
     title: '登录页面'
   })
 }
-exports.logout = function(req, res) {
+
+const logout = (req, res, next) => {
   delete req.session.user
   res.redirect('/')
 }
-exports.list = function(req, res, next) {
+
+const list = (req, res, next) => {
   User.feach(function(err, users) {
     if (err) {
       console.log(err)
@@ -69,17 +72,29 @@ exports.list = function(req, res, next) {
   })
 }
 // midware for user
-exports.signinRequired = function(req, res, next) {
+const signinRequired = (req, res, next) => {
   const user = req.session.user
   if (!user) {
     return res.redirect('/signin')
   }
   next()
 }
-exports.adminRequired = function(req, res, next) {
+
+const adminRequired = (req, res, next) => {
   const user = req.session.user
   // if (user.role <= 10) {
   //   return res.redirect('/signin')
   // }
   next()
+}
+
+export default {
+  signup,
+  signin,
+  showSignup,
+  showSignin,
+  logout,
+  list,
+  signinRequired,
+  adminRequired
 }

@@ -1,7 +1,9 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
+
 mongoose.Promise = global.Promise
 const Schema = mongoose.Schema
 const ObjectId = Schema.Types.ObjectId
+
 const CategorySchema = new Schema({
   name: String,
   books: [{ type: ObjectId, ref: 'Book' }],
@@ -37,4 +39,5 @@ CategorySchema.statics = {
       .exec(cb)
   }
 }
-module.exports = CategorySchema
+
+export default CategorySchema

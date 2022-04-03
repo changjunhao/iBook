@@ -12,7 +12,7 @@ block content
 						th 删除
 				tbody
 					each item in users
-						tr(class='item-id-#{item._id}')
+						tr(class=`item-id-${item._id}`)
 							td #{item.name}
 							td #{moment(item.meta.createdAt).format('MM/DD/YYYY')}
 							td: a(target="_blank",href="../user/" + item._id) 查看

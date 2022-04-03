@@ -198,4 +198,5 @@ Temporary Items
 .idea/vcs.xml
 .idea/watcherTasks.xml
 .idea/workspace.xml
-public/upload/
+public/upload/uploadCover-*
+

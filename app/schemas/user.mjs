@@ -1,7 +1,9 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
+import bcrypt from 'bcrypt-nodejs'
+
 mongoose.Promise = global.Promise
-const bcrypt = require('bcrypt-nodejs')
 const SALT_WORK_FACTOR = 10
+
 const UserSchema = new mongoose.Schema({
   name: {
     unique: true,
@@ -66,4 +68,5 @@ UserSchema.statics = {
       .exec(cb)
   }
 }
-module.exports = UserSchema
+
+export default UserSchema

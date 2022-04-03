@@ -1,16 +1,16 @@
 module.exports = {
-    "extends": "standard",
-    "plugins": [
-        "standard",
-        "promise"
-    ],
-    "rules": {
-        "no-var": "error",
-        "handle-callback-err": 0,
-        "space-before-function-paren": ["error", {
-          "anonymous": "never",
-          "named": "never",
-          "asyncArrow": "always"
-        }]
-    }
-};
+  env: {
+    browser: true,
+    es2021: true,
+    node: true
+  },
+  extends: [
+    'standard'
+  ],
+  parserOptions: {
+    ecmaVersion: 12,
+    sourceType: 'module'
+  },
+  rules: {
+  }
+}

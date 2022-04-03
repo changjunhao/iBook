@@ -1,24 +1,18 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
+
 mongoose.Promise = global.Promise
 const Schema = mongoose.Schema
 const ObjectId = Schema.Types.ObjectId
-const BookSchema = new Schema({
-  title: String,
-  author: String,
-  publisher: String,
-  price: String,
-  summary: String,
-  isbn: String,
-  cover: String,
-  year: String,
-  category: {
-    type: ObjectId,
-    ref: 'Category'
-  },
-  pv: {
-    type: Number,
-    default: 0
-  },
+
+const CommentSchema = new Schema({
+  book: { type: ObjectId, ref: 'Book' },
+  from: { type: ObjectId, ref: 'User' },
+  reply: [{
+    from: { type: ObjectId, ref: 'User' },
+    to: { type: ObjectId, ref: 'User' },
+    content: String
+  }],
+  content: String,
   meta: {
     createdAt: {
       type: Date,
@@ -30,7 +24,7 @@ const BookSchema = new Schema({
     }
   }
 })
-BookSchema.pre('save', function(next) {
+CommentSchema.pre('save', function(next) {
   if (this.isNew) {
     this.meta.createdAt = this.meta.updateAt = Date.now()
   } else {
@@ -38,7 +32,7 @@ BookSchema.pre('save', function(next) {
   }
   next()
 })
-BookSchema.statics = {
+CommentSchema.statics = {
   feach: function(cb) {
     return this
       .find({})
@@ -51,4 +45,4 @@ BookSchema.statics = {
       .exec(cb)
   }
 }
-module.exports = BookSchema
+export default CommentSchema
