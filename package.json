@@ -18,7 +18,7 @@
     "morgan": "^1.9.1",
     "multer": "^1.4.2",
     "pug": "^2.0.4",
-    "underscore": "^1.8.3"
+    "underscore": "^1.12.1"
   },
   "devDependencies": {
     "eslint": "^6.2.2",
