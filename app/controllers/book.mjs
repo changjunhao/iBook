@@ -5,7 +5,7 @@ import Comment from '../models/comment.mjs'
 
 const detail = (req, res, next) => {
   const id = req.params.id
-  Book.update({ _id: id }, { $inc: { pv: 1 } }, function(err) {
+  Book.updateOne({ _id: id }, { $inc: { pv: 1 } }, function(err) {
     if (err) {
       console.log(err)
     }

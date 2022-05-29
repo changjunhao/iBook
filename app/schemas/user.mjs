@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import bcrypt from 'bcrypt-nodejs'
+import bcrypt from 'bcrypt'
 
 mongoose.Promise = global.Promise
 const SALT_WORK_FACTOR = 10
@@ -36,7 +36,7 @@ UserSchema.pre('save', function(next) {
     if (err) {
       return next(err)
     }
-    bcrypt.hash(user.password, salt, null, function(err, hash) {
+    bcrypt.hash(user.password, salt, function(err, hash) {
       if (err) {
         return next(err)
       }

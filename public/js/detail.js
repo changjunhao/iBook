@@ -1,5 +1,5 @@
-$(function() {
-  $('.comment').click(function(e) {
+$(function () {
+  $('.comment').click(function (e) {
     const target = $(this)
     const toId = target.data('tid')
     const commentId = target.data('cid')

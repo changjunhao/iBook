@@ -1,5 +1,5 @@
-$(function() {
-  $('.del').click(function(e) {
+$(function () {
+  $('.del').click(function (e) {
     const target = $(e.target)
     const id = target.data('id')
     const tr = $('.item-id-' + id)
@@ -7,7 +7,7 @@ $(function() {
       type: 'DELETE',
       url: '/admin/book/list?id=' + id
     })
-      .done(function(results) {
+      .done(function (results) {
         if (results.success === 1) {
           if (tr.length > 0) {
             tr.remove()
@@ -15,7 +15,7 @@ $(function() {
         }
       })
   })
-  $('#douban').blur(function() {
+  $('#douban').blur(function () {
     const douban = $(this)
     const id = douban.val()
     if (id) {
@@ -26,7 +26,7 @@ $(function() {
         dataType: 'jsonp',
         crossDomain: true,
         jsonp: 'callback',
-        success: function(data) {
+        success: function (data) {
           $('#inputTitle').val(data.title)
           $('#inputAuthor').val(data.author[0])
           $('#inputPublisher').val(data.publisher)
