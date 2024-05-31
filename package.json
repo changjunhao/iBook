@@ -21,7 +21,7 @@
     "mongoose": "^6.11.3",
     "morgan": "^1.10.0",
     "multer": "^1.4.4",
-    "pug": "^3.0.2",
+    "pug": "^3.0.3",
     "underscore": "^1.13.3"
   },
   "devDependencies": {
