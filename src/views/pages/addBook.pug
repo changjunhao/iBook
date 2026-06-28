@@ -1,0 +1,60 @@
+extends ../layout
+block content
+	.container
+		form.row(method='post',action='/admin/book',enctype="multipart/form-data")
+			input(type="hidden", name="_csrf", value=csrfToken)
+			if book._id
+				input(type="hidden",name="book[_id]",value=`${book._id}`)
+			.form-group.row.mb-3
+				label.col-sm-2.col-form-label(for='inputCategory') 书籍分类
+				.col-sm-10
+					input#inputCategory.form-control(type='text',name='book[categoryName]',value=book.categoryName)
+			.form-group.row.mb-3
+				label.col-sm-2.col-form-label 分类选择
+				.col-sm-10
+					each cat in categories
+						.form-check.form-check-inline
+							if book.category
+								input.form-check-input(type='radio',name='book[category]',value=cat._id,checked=cat._id.toString()==book.category.toString())
+							else
+								input.form-check-input(type='radio',name='book[category]',value=cat._id)
+							label.form-check-label #{cat.name}
+			.form-group.row.mb-3
+				label.col-sm-2.col-form-label(for='inputTitle') 书籍名称
+				.col-sm-10
+					input#inputTitle.form-control(type='text',name='book[title]',value=book.title)
+			.form-group.row.mb-3
+				label.col-sm-2.col-form-label(for='inputAuthor') 作者
+				.col-sm-10
+					input#inputAuthor.form-control(type='text',name='book[author]',value=book.author)
+			.form-group.row.mb-3
+				label.col-sm-2.col-form-label(for='inputPublisher') 出版社
+				.col-sm-10
+					input#inputPublisher.form-control(type='text',name='book[publisher]',value=book.publisher)
+			.form-group.row.mb-3
+				label.col-sm-2.col-form-label(for='inputYear') 出版年代
+				.col-sm-10
+					input#inputYear.form-control(type='text',name='book[year]',value=book.year)
+			.form-group.row.mb-3
+				label.col-sm-2.col-form-label(for='inputIsbn') ISBN
+				.col-sm-10
+					input#inputIsbn.form-control(type='text',name='book[isbn]',value=book.isbn)
+			.form-group.row.mb-3
+				label.col-sm-2.col-form-label(for='inputCover') 封面地址
+				.col-sm-10
+					input#inputCover.form-control(type='text',name='book[cover]',value=book.cover)
+			.form-group.row.mb-3
+				label.col-sm-2.col-form-label(for="uploadCover") 封面上传
+				.col-sm-10
+					input#uploadCover.form-control(type="file", name="uploadCover")
+			.form-group.row.mb-3
+				label.col-sm-2.col-form-label(for='inputSummary') 内容简介
+				.col-sm-10
+					input#inputSummary.form-control(type='text',name='book[summary]',value=book.summary)
+			.form-group.row.mb-3
+				label.col-sm-2.col-form-label(for='inputPrice') 定价
+				.col-sm-10
+					input#inputPrice.form-control(type='text',name='book[price]',value=book.price)
+			.form-group.row.mb-3
+				.offset-sm-2.col-sm-2
+					button.btn.btn-primary(type='submit') 录入

@@ -1,0 +1,22 @@
+extends ../layout
+block content
+	.container
+		.row
+			table.table.table-bordered.table-hover
+				thead
+					tr
+						th 名字
+						th 时间
+						th 查看
+						th 更新
+						th 删除
+				tbody
+					each item in users
+						tr(class=`item-id-${item._id}`)
+							td #{item.name}
+							td #{formatDate(item.meta.createdAt)}
+							td: a(target="_blank",href="/admin/user/" + item._id) 查看
+							td: a(target="_blank",href="/admin/user/update/" + item._id) 修改
+							td
+								button.btn.btn-danger.del(type="button",data-id=item._id,data-url="/admin/user/list?id=" + item._id) 删除
+	script(src='/js/admin.js')

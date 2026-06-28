@@ -1,0 +1,12 @@
+extends ../layout
+block content
+	.container
+		form.row(method='post',action='/admin/category/update/' + category._id)
+			input(type="hidden", name="_csrf", value=csrfToken)
+			.form-group.row.mb-3
+				label.col-sm-2.col-form-label(for='inputCategory') 书籍分类
+				.col-sm-10
+					input#inputCategory.form-control(type='text',name='category[name]',value=category.name)
+			.form-group.row.mb-3
+				.offset-sm-2.col-sm-2
+					button.btn.btn-primary(type='submit') 保存

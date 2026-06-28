@@ -6,7 +6,8 @@
 
 import http from 'http'
 import debugLib from 'debug'
-import app from '../app.mjs'
+import app from '../src/app.mjs'
+import config from '../src/config.mjs'
 
 const debug = debugLib('iBook:server')
 
@@ -14,7 +15,7 @@ const debug = debugLib('iBook:server')
  * Get port from environment and store in Express.
  */
 
-const port = normalizePort(process.env.PORT || '3000')
+const port = normalizePort(config.port)
 app.set('port', port)
 
 /**

@@ -1,0 +1,24 @@
+extends ../layout
+block content
+	.container
+		.row
+			.card.mb-3
+				.card-header
+					h3 修改用户
+				.card-body
+					form(method="post",action="/admin/user/update/" + user._id)
+						input(type="hidden", name="_csrf", value=csrfToken)
+						.mb-3
+							label(for="inputName") 用户名
+							input#inputName.form-control(type="text",name="name",value=user.name)
+						.mb-3
+							label(for="inputPassword") 新密码（留空则不修改）
+							input#inputPassword.form-control(type="password",name="password",placeholder="留空则不修改")
+						.mb-3
+							label(for="inputRole") 角色
+							select#inputRole.form-select(name="role")
+								option(value="0",selected=user.role < 10) 普通用户 (0)
+								option(value="10",selected=user.role >= 10) 管理员 (10)
+						button.btn.btn-primary(type="submit") 保存
+						| &nbsp;
+						a.btn.btn-secondary(href="/admin/user/list") 取消

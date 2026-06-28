@@ -2,34 +2,34 @@
   "name": "ibook",
   "version": "2.0.0",
   "description": "iBook",
-  "main": "index.js",
+  "type": "module",
   "scripts": {
-    "start": "node ./bin/www.mjs"
+    "start": "node ./bin/www.mjs",
+    "test": "node --test --test-concurrency=1 tests/unit/utils/*.test.mjs tests/integration/*.test.mjs",
+    "test:watch": "node --test --watch tests/"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^5.0.1",
-    "body-parser": "^1.20.3",
-    "connect-mongo": "^4.6.0",
-    "cookie-parser": "^1.4.6",
-    "debug": "^4.3.4",
-    "express": "^4.20.0",
-    "express-session": "^1.17.3",
-    "moment": "^2.29.4",
-    "mongoose": "^6.13.9",
-    "morgan": "^1.10.0",
+    "connect-mongo": "^6.0.0",
+    "cookie-parser": "^1.4.7",
+    "debug": "^4.4.3",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "mongoose": "^9.7.3",
+    "morgan": "^1.11.0",
     "multer": "^2.2.0",
-    "pug": "^3.0.3",
-    "underscore": "^1.13.8"
+    "pug": "^3.0.4"
   },
   "devDependencies": {
-    "eslint": "^8.16.0",
-    "eslint-config-standard": "^17.0.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-n": "^15.2.0",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^6.0.0"
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.6.0",
+    "globals": "^17.7.0",
+    "supertest": "^7.2.2"
+  },
+  "engines": {
+    "node": ">=20.11.0"
   }
 }

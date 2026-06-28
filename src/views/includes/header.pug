@@ -1,0 +1,54 @@
+header.bg-light.fixed-top.shadow-sm
+	.container.py-1
+		.d-flex.align-items-center.justify-content-between
+			a.text-decoration-none.text-dark(href='/')
+				span.fw-bold.fs-5 书籍是造就灵魂的工具
+			.small
+				if user
+					span 欢迎您，#{user.name}
+					| &nbsp;|&nbsp;
+					a(href="/logout") 注销
+				else
+					a(href="#signupModal",data-bs-toggle="modal") 注册
+					| &nbsp;|&nbsp;
+					a(href="#signinModal",data-bs-toggle="modal") 登录
+		hr.my-0
+	.container.py-1
+		.d-flex.align-items-center
+			a.nav-link.px-2(href='/') 首页
+			a.nav-link.px-2(href='/results') 书籍
+			form.d-flex.ms-auto(method='GET',action='/results')
+				input.form-control.form-control-sm.me-2(style='width:220px',type='text',name='q',placeholder='搜索书籍')
+				button.btn.btn-outline-secondary.btn-sm.px-3(type='submit') 搜索
+#signupModal.modal.fade(tabindex="-1")
+	.modal-dialog
+		.modal-content
+			form(method="post",action="/user/signup")
+				input(type="hidden", name="_csrf", value=csrfToken)
+				.modal-header 注册
+				.modal-body
+					.form-group.mb-3
+						label(for="signupName") 用户名
+						input#signupName.form-control(name="user[name]",type="text")
+					.form-group.mb-3
+						label(for="signupPassword") 密码
+						input#signupPassword.form-control(name="user[password]",type="password")
+				.modal-footer
+					button.btn.btn-secondary(type="button",data-bs-dismiss="modal") 关闭
+					button.btn.btn-success(type="submit") 注册
+#signinModal.modal.fade(tabindex="-1")
+	.modal-dialog
+		.modal-content
+			form(method="post",action="/user/signin")
+				input(type="hidden", name="_csrf", value=csrfToken)
+				.modal-header 登录
+				.modal-body
+					.form-group.mb-3
+						label(for="signinName") 用户名
+						input#signinName.form-control(name="user[name]",type="text")
+					.form-group.mb-3
+						label(for="signinPassword") 密码
+						input#signinPassword.form-control(name="user[password]",type="password")
+				.modal-footer
+					button.btn.btn-secondary(type="button",data-bs-dismiss="modal") 关闭
+					button.btn.btn-success(type="submit") 登录

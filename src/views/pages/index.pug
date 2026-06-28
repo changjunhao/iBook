@@ -1,0 +1,24 @@
+extends ../layout
+block content
+	.container
+		.row
+			each cat in categories
+				.card.mb-3
+					.card-header
+						h4
+							a(href=`/results?cat=${cat._id}&p=0`) #{cat.name}
+					.card-body
+						if cat.books && cat.books.length > 0
+							.row
+								each item in cat.books
+									.col-md-2.mb-3
+										.card
+											a(href=`/book/${item._id}`)
+												if item.cover && item.cover.indexOf('https:') > -1
+													img.card-img-top(src=`${item.cover}`,alt=`${item.title}`)
+												else
+													img.card-img-top(src=`/upload/${item.cover}`,alt=`${item.title}`)
+											.card-body
+												h4.card-title= item.title
+												P: a.btn.btn-primary(href='/book/#{item._id}',role='button')
+													|查看详情
